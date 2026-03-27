@@ -12,5 +12,8 @@ public class PlayerAnimator : MonoBehaviour
     private void Update()
     {
         animator.SetBool("Moving", player.IsMoving());
+        animator.SetBool("HoldingThing", player.IsHolding());
+
+        Debug.Log("moving " + player.IsMoving() + " - holding " + player.IsHolding());
     }
 }
