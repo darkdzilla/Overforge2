@@ -15,3 +15,4 @@ MonoBehaviour:
   prefab: {fileID: 3933291168846011352, guid: 2a5d52b38f2ec6144b9fc88f758dfac6, type: 3}
   sprite: {fileID: 0}
   objectName: Iron
+  itemType: 1

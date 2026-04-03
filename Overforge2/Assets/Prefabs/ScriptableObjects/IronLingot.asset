@@ -15,3 +15,4 @@ MonoBehaviour:
   prefab: {fileID: 4338952891918108642, guid: eed0741f023d3404baf9e018e73608b9, type: 3}
   sprite: {fileID: 0}
   objectName: Lingot
+  itemType: 4
