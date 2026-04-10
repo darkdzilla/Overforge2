@@ -57,16 +57,24 @@ public class Player : MonoBehaviour
         {
             if (raycastHit.transform.TryGetComponent(out Interactable interactable)) 
             {
-                if (materialHolded && !string.IsNullOrEmpty(interactable.requirement))
+                if (materialHolded && interactable.typeRequirement != 0)
                 {
-                    if (interactable.requirement == materialHolded.GetComponent<Item>().GetItemSO().objectName)
+                    if (interactable.typeRequirement == materialHolded.GetComponent<Item>().GetItemSO().itemType)
                     {
                         interactable.HighlightInteractable();
                         selectedInteractable = interactable;
                     }
-
+                    else
+                    {
+                        AnvilInteractable ai = (AnvilInteractable)interactable;
+                        if (ai != null && ai.otherRequirement == materialHolded.GetComponent<Item>().GetItemSO().itemType)
+                        {
+                            interactable.HighlightInteractable();
+                            selectedInteractable = interactable;
+                        }
+                    }
                 }
-                else if (string.IsNullOrEmpty(interactable.requirement))
+                else if (interactable.typeRequirement == 0)
                 {
                     interactable.HighlightInteractable();
                     selectedInteractable = interactable;
@@ -120,5 +128,10 @@ public class Player : MonoBehaviour
         if (materialHolded != null) Destroy(materialHolded);
         materialHolded = null;
         isHolding = false;
+    }
+
+    public GameObject MaterialBeingHold()
+    {
+        return materialHolded;
     }
 }

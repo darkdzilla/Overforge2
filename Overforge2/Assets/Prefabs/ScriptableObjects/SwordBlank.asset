@@ -14,5 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ItemSO
   prefab: {fileID: 4419444584210354225, guid: ec8218e679b16a04084fed847252ec7c, type: 3}
   sprite: {fileID: 0}
-  objectName: Blank
-  itemType: 5
+  itemType: 6

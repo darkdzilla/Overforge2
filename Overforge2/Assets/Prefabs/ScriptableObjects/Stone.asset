@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9407c74149fbea64d86455fe2f8da8cc, type: 3}
   m_Name: Stone
   m_EditorClassIdentifier: Assembly-CSharp::ItemSO
-  prefab: {fileID: 0}
+  prefab: {fileID: 5634905549112331612, guid: ad151e3a4d6136c47a4d3f14959621b8, type: 3}
   sprite: {fileID: 0}
-  objectName: 
+  itemType: 1

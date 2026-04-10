@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9407c74149fbea64d86455fe2f8da8cc, type: 3}
   m_Name: Club
   m_EditorClassIdentifier: Assembly-CSharp::ItemSO
-  prefab: {fileID: 0}
+  prefab: {fileID: 5475695058320556513, guid: 5825f5a16b47cfe42ac6b965ce234a5c, type: 3}
   sprite: {fileID: 0}
-  objectName: 
-  itemType: 13
+  itemType: 14

@@ -6,7 +6,8 @@ public class Interactable : MonoBehaviour
 {
     [SerializeField] GameObject highlight;
     [SerializeField] private GameObject screen;
-    public string requirement;
+    //public string requirement;
+    public ItemTypeEnum typeRequirement;
 
     private bool selectedForInteraction;
 
