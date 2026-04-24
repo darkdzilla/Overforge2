@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: SwordBlank
   m_EditorClassIdentifier: Assembly-CSharp::ItemSO
   prefab: {fileID: 4419444584210354225, guid: ec8218e679b16a04084fed847252ec7c, type: 3}
-  sprite: {fileID: 0}
+  sprite: {fileID: 2080351623, guid: 5866749161ae0e8439721a2b87e3c155, type: 3}
   itemType: 6

@@ -7,13 +7,15 @@ public class Player : MonoBehaviour
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private GameInput gameInput;
     [SerializeField] private LayerMask countersLayerMask;
-    [SerializeField] private Transform materialpivot;
+    [SerializeField] private Transform materialPivot;
+    [SerializeField] private DroppedItemInteractable droppedItemPrefab;
+    [SerializeField] private float dropDistance = 1.2f;
 
     private bool isMoving;
     private bool isHolding;
     private Vector3 lastInteractDir;
     private Interactable selectedInteractable;
-    private GameObject materialHolded;
+    private GameObject materialHeld;
 
     private void Awake()
     {
@@ -25,60 +27,84 @@ public class Player : MonoBehaviour
         gameInput.OnInteractAction += DoInteraction;
     }
 
-    void Update()
+    private void Update()
     {
         HandleMovement();
         HandleInteractions();
     }
 
-    public bool IsMoving()
+    public bool IsMoving() => isMoving;
+    public bool IsHolding() => isHolding;
+    public GameObject MaterialBeingHold() => materialHeld;
+
+    public ItemSO GetHeldItemSO()
     {
-        return isMoving;
+        if (materialHeld == null) return null;
+        return materialHeld.GetComponent<Item>().GetItemSO();
     }
 
-    public bool IsHolding()
+    public void GetMaterial(ItemSO so)
     {
-        return isHolding;
+        if (materialHeld != null) Destroy(materialHeld);
+        materialHeld = Instantiate(so.prefab.gameObject, materialPivot);
+        materialHeld.GetComponent<Item>().SetItemSO(so);
+        isHolding = true;
     }
 
-    private void DoInteraction (object sender, System.EventArgs e)
+    public void ClearMaterial()
     {
-        if (selectedInteractable != null) selectedInteractable.InitInteraction();
+        if (materialHeld != null) Destroy(materialHeld);
+        materialHeld = null;
+        isHolding = false;
     }
 
-    private void HandleInteractions ()
+    private void DoInteraction(object sender, System.EventArgs e)
+    {
+        if (selectedInteractable != null)
+        {
+            selectedInteractable.InitInteraction();
+        }
+        else if (materialHeld != null)
+        {
+            Vector3 dropPos = transform.position + lastInteractDir * dropDistance;
+            DropItem(GetHeldItemSO(), dropPos);
+            ClearMaterial();
+        }
+    }
+
+    public void DropItem(ItemSO itemSO, Vector3 position)
+    {
+        DroppedItemInteractable dropped = Instantiate(droppedItemPrefab, position, Quaternion.identity);
+        dropped.Setup(itemSO);
+    }
+
+    private void HandleInteractions()
     {
         Vector2 inputVector = gameInput.GetMovementVectorNormalized();
         Vector3 moveDir = new Vector3(inputVector.x, 0, inputVector.y);
         if (moveDir != Vector3.zero) lastInteractDir = moveDir;
 
         float interactDistance = 1.6f;
-        if (Physics.Raycast(transform.position, lastInteractDir, out RaycastHit raycastHit, interactDistance, countersLayerMask))
+
+        if (Physics.Raycast(transform.position, lastInteractDir, out RaycastHit hit, interactDistance, countersLayerMask))
         {
-            if (raycastHit.transform.TryGetComponent(out Interactable interactable)) 
+            if (hit.transform.TryGetComponent(out Interactable interactable))
             {
-                if (materialHolded && interactable.typeRequirement != 0)
+                ItemSO heldItem = GetHeldItemSO();
+
+                if (interactable.CanInteract(heldItem))
                 {
-                    if (interactable.typeRequirement == materialHolded.GetComponent<Item>().GetItemSO().itemType)
-                    {
-                        interactable.HighlightInteractable();
-                        selectedInteractable = interactable;
-                    }
-                    else
-                    {
-                        AnvilInteractable ai = (AnvilInteractable)interactable;
-                        if (ai != null && ai.otherRequirement == materialHolded.GetComponent<Item>().GetItemSO().itemType)
-                        {
-                            interactable.HighlightInteractable();
-                            selectedInteractable = interactable;
-                        }
-                    }
-                }
-                else if (interactable.typeRequirement == 0)
-                {
-                    interactable.HighlightInteractable();
+                    interactable.SetHighlight(true);
                     selectedInteractable = interactable;
                 }
+                else
+                {
+                    selectedInteractable = null;
+                }
+            }
+            else
+            {
+                selectedInteractable = null;
             }
         }
         else
@@ -87,14 +113,14 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void HandleMovement ()
+    private void HandleMovement()
     {
         Vector2 inputVector = gameInput.GetMovementVectorNormalized();
-
         Vector3 moveDir = new Vector3(inputVector.x, 0, inputVector.y);
 
         float moveDistance = moveSpeed * Time.deltaTime;
         bool canMove = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * 2f, 0.8f, moveDir, moveDistance);
+
         if (!canMove)
         {
             Vector3 moveDirX = new Vector3(moveDir.x, 0, 0).normalized;
@@ -105,7 +131,6 @@ public class Player : MonoBehaviour
             {
                 Vector3 moveDirZ = new Vector3(0, 0, moveDir.z).normalized;
                 canMove = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * 2f, 0.8f, moveDirZ, moveDistance);
-
                 if (canMove) moveDir = moveDirZ;
             }
         }
@@ -113,25 +138,5 @@ public class Player : MonoBehaviour
         if (canMove) transform.position += moveDir * moveDistance;
         transform.forward = Vector3.Slerp(transform.forward, moveDir, Time.deltaTime * 15f);
         isMoving = moveDir != Vector3.zero;
-    }
-
-    public void GetMaterial(ItemSO so)
-    {
-        if (materialHolded != null) Destroy(materialHolded);
-        materialHolded = Instantiate(so.prefab.gameObject, materialpivot);
-        materialHolded.GetComponent<Item>().SetItemSO(so);
-        isHolding = true;
-    }
-
-    public void ClearMaterial()
-    {
-        if (materialHolded != null) Destroy(materialHolded);
-        materialHolded = null;
-        isHolding = false;
-    }
-
-    public GameObject MaterialBeingHold()
-    {
-        return materialHolded;
     }
 }

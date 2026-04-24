@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: RawIron
   m_EditorClassIdentifier: Assembly-CSharp::ItemSO
   prefab: {fileID: 3933291168846011352, guid: 2a5d52b38f2ec6144b9fc88f758dfac6, type: 3}
-  sprite: {fileID: 0}
+  sprite: {fileID: 89931748, guid: 5866749161ae0e8439721a2b87e3c155, type: 3}
   itemType: 2

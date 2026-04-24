@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb550af87b231b64e85e7872c5aa3535, type: 3}
+  m_Name: RecipeClub
+  m_EditorClassIdentifier: Assembly-CSharp::RecipeSO
+  recipeName: R_Club
+  steps:
+  - {fileID: 11400000, guid: d4db3cd311f82584180f481f18a674e1, type: 2}
+  - {fileID: 11400000, guid: 729eb1d2116d76c44acd7c91fde289a2, type: 2}

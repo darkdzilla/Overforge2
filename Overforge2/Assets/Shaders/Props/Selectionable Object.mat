@@ -60,7 +60,7 @@ Material:
     m_Floats:
     - _Contrast_mask: 0.03
     - _Emission_intencity: 1.7
-    - _Metallic_remap: 0.5
+    - _Metallic_remap: 0.71
     - _Normal_intencity: 1
     - _Position_mask: 1.1
     - _QueueControl: 0

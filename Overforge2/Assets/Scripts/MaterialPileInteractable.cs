@@ -2,20 +2,16 @@ using UnityEngine;
 
 public class MaterialPileInteractable : Interactable
 {
-    [SerializeField] private ItemSO materialObject;
-    protected override void Update()
-    {
-        base.Update();
-    }
+    [SerializeField] private ItemSO materialToGive;
 
-    public override void HighlightInteractable()
+    public override bool CanInteract(ItemSO heldItem)
     {
-        base.HighlightInteractable();
+        return true;
     }
 
     public override void InitInteraction()
     {
-        //base.InitInteraction();
-        Player.Instance.GetMaterial(materialObject);
+        Player.Instance.ClearMaterial();
+        Player.Instance.GetMaterial(materialToGive);
     }
 }

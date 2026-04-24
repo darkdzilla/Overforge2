@@ -10,10 +10,10 @@ public class AnvilInteractable : Interactable
         base.Update();
     }
 
-    public override void HighlightInteractable()
-    {
-        base.HighlightInteractable();
-    }
+    //public override void HighlightInteractable()
+    //{
+    //    base.HighlightInteractable();
+    //}
 
     public override void InitInteraction()
     {

@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: RawWood
   m_EditorClassIdentifier: Assembly-CSharp::ItemSO
   prefab: {fileID: 1205864626740152542, guid: 3f3adc732e64e4f408dc5ef801b82a31, type: 3}
-  sprite: {fileID: 0}
+  sprite: {fileID: 987719930, guid: 5866749161ae0e8439721a2b87e3c155, type: 3}
   itemType: 3

@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8edf9110ebd67d442914cea88bf12233, type: 3}
+  m_Name: ClubStep2
+  m_EditorClassIdentifier: Assembly-CSharp::RecipeStepSO
+  station: 4
+  input1: {fileID: 11400000, guid: 29dbe4f8beab1ab4185fabf326e8bf65, type: 2}
+  input2: {fileID: 11400000, guid: 72c6ee2af38fddc4fac7c243b33b7c52, type: 2}
+  output: {fileID: 11400000, guid: ec6b35392fbe7044abf6fa6dc47d81cd, type: 2}

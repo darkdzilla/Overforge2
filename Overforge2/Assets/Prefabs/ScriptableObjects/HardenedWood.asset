@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: HardenedWood
   m_EditorClassIdentifier: Assembly-CSharp::ItemSO
   prefab: {fileID: 6876763766529676128, guid: b03cebddd4da2b74ab1c2011c7b4fcc7, type: 3}
-  sprite: {fileID: 0}
+  sprite: {fileID: -790955934, guid: 5866749161ae0e8439721a2b87e3c155, type: 3}
   itemType: 15
